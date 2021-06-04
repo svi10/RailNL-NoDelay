@@ -9,19 +9,26 @@ def load_stations(stationfile):
         reader = csv.DictReader(f)
         for row in reader:
             stations[row['station']] = Station(row['station'])
-            # print(stations)
-        
-        print(stations)
 
-def load_connections(connectionfile):
+    return stations    
+        # print(stations)
+
+def load_connections(connectionfile, stations):
     connections = {}
+    
+    with open(connectionfile) as connection_file:
+        reader = csv.DictReader(connection_file)
+        for row in reader:
+            stations[row['station1']].add_connection(stations[row['station2']], int(row['distance']))
+            stations[row['station2']].add_connection(stations[row['station1']], int(row['distance']))
 
-    with open(connectionfile) as f:
-        reader = csv.DictReader(f)
-        # for row in reader:
-            # print(row['station1'], row['station2'])
-        # for row in reader:
-        #     row["x"] = int(row["x"])
-        #     row["y"] = int(row["y"])
-        #     stations()
+    return 
+            # if stations[row['station1']] in connections.keys():
+                # connections[stations[row['station1']]] = stations[row['station2']], int(row['distance'])
+            # connections[stations[row['station2']]] = connections[row['station1']], connections[row['distance']]
 
+            # connections[row['station1']] = stations[row['station1']]
+            
+            
+        # print(connections)
+            # row['station2'])

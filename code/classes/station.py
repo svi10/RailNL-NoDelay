@@ -21,6 +21,8 @@ class Station:
         Accepts another Station (object) and tripduration, and stores those in the dictionary
         """
         self.connections[destination] = tripduration
+        # print(self.connections)
+
     
     def has_connection(self, destination):
         """

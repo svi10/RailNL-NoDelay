@@ -1,35 +1,45 @@
-from code.trajectory import Trajectory
-from code.trajectory import Trajectories
-import cv
+from code.classes.trajectory import Trajectory
+from code.classes.trajectories import Trajectories
+import csv
 
 
-def give_solution(self, graph):
+def give_solution(graph, trajectories):
     """
     An algorithm that gives a solution, without taking anything, such as connections, into account
     """
-    stations = []
 
-    for i in graph:
-        station = graph[i].keys()
-        stations.append(station)
-    
-    solution = Trajectories()
+    # Make a list with all available stations
+    stations = list(graph.values())
 
+
+    # Initialize the solution object
+    solution = trajectories
+
+    # Create 7 trajects and add them to the trajectories
+    # Each traject has five stations
+    # Note: the connections between stations are disregarded here
     for i in range(7):
+        # Initiate traject object
         trajectory = Trajectory()
 
-        for j in range(i, i + 5):
+        # Fill traject object with stations
+        for j in range(0, 4):
             trajectory.add_station(stations[j])
 
+        # Add traject to trajectories
         solution.add_trajectory(trajectory)
 
     return solution
 
 
-def convert_solution(self, solution):
+def convert_solution(solution):
     """
     Converts the solution from a list into a csv file
     """
-    with open (solution.csv, newline='') as f:
+    with open ('solution_file.csv', 'w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerows(solution)
+        # Write the headers
+        writer.writerow(['train', 'stations'])
+
+        for trajectory in solution.trajectories:
+            writer.writerow(['trein', solution.stations])
