@@ -1,17 +1,18 @@
-from data import csv
+# from data import csv
 
 class Station:
     """
     Class Station is an object that describes a single station. 
     """
-    def __init__(self, name, x, y):
+    def __init__(self, name):
 
         # initializes station properties
         self.name = name
-        self.x = x
-        self.y = y
-        self.connection_storage = {"key: connectedstation";"value: tripduration"}
-
+        # self.x = x
+        # self.y = y
+        self.connections = {}
+        # "key: connectedstation";"value: tripduration"
+        
         # sets attribute visited equal to false when the station is first initialized
         self.visited = False
 

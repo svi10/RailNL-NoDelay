@@ -1,4 +1,4 @@
-from data import csv
+# from data import csv
 
 class Trajectory:
     """
