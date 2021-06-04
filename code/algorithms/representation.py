@@ -42,4 +42,4 @@ def convert_solution(solution):
         writer.writerow(['train', 'stations'])
 
         for trajectory in solution.trajectories:
-            writer.writerow(['trein', solution.stations])
+            writer.writerow(['train', trajectory.stations])
