@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 import csv
 
-def map_solution(stations):
+def map_solution(solution):
     """
     map out all trajectories from a specific solution
     """
 
     # Different colors to plot each trajectory in
-    colour = ['green', 'red', 'blue', 'lime', 'orange', 'cyan', 'yellow']
+    colors = ['green', 'red', 'blue', 'lime', 'orange', 'cyan', 'yellow']
 
     # Create list of coordinates for all stations
     coordinates = []
@@ -19,22 +19,23 @@ def map_solution(stations):
     file.close()
 
     # Plot the trajectories
-    file = open('example_output.csv')
+    plt.figure(figsize=(10,10))
+    
+    file = open(solution)
     reader = csv.DictReader(file)
-    i = 0
+
+    c = 0
     for row in reader:
         if row.get('train') == 'score':
             break 
 
-        i = i + 1
         # Get all coordinates
         x_values = []
         y_values = []
 
         stations = row.get('stations')
         
-        stations = stations.strip('[')
-        stations = stations.strip(']')
+        stations = stations.strip('[]')
         stations = stations.split(', ')
         
         for i in range(len(stations)):
@@ -46,11 +47,17 @@ def map_solution(stations):
                     x_values.append(x)
                     y = float(coordinate.get('y'))
                     y_values.append(y)
+                    plt.annotate(current_station, (x, y))
                     break
 
-        plt.plot(x_values, y_values, marker='o')
+        plt.plot(x_values, y_values, marker='o', color=colors[c], label=f'train {c+1}')
         plt.axis("off")
+
+        c = c + 1
 
     file.close()
 
+    plt.legend()
     plt.show()
+
+map_solution('example_output.csv')
