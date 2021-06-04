@@ -1,4 +1,4 @@
-from data import csv
+# from data import csv
 
 class Trajectory:
     """
@@ -13,5 +13,5 @@ class Trajectory:
         if time > 120:
             return False
 
-    def add_station(self):
-        pass
+    def add_station(self, station):
+        self.stations.append(station)
