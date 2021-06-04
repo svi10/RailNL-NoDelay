@@ -12,8 +12,9 @@ def map_solution(solution):
     # Create list of coordinates for all stations
     coordinates = []
 
-    file = open('StationsHolland.csv')
+    file = open('StationsHolland.csv')  # ! Adjust this so the file can be varied based on the user input
     reader = csv.DictReader(file)
+    
     for row in reader:
         coordinates.append(row)
     file.close()
@@ -24,20 +25,25 @@ def map_solution(solution):
     file = open(solution)
     reader = csv.DictReader(file)
 
+    # Initialize counter
     c = 0
+
     for row in reader:
+        # End when the end of the file is reached
         if row.get('train') == 'score':
             break 
 
-        # Get all coordinates
+        # Retrieve all stations in the trajectory
+        stations = row.get('stations')
+        
+        # Clean up the list of stations
+        stations = stations.strip('[]').split(', ')
+        
+
+        # Get coordinates for each train in the trajectory
         x_values = []
         y_values = []
 
-        stations = row.get('stations')
-        
-        stations = stations.strip('[]')
-        stations = stations.split(', ')
-        
         for i in range(len(stations)):
             current_station = stations[i]
             for j in range(len(coordinates)):
@@ -45,19 +51,26 @@ def map_solution(solution):
                 if coordinate.get('station') == current_station:
                     x = float(coordinate.get('x'))
                     x_values.append(x)
+
                     y = float(coordinate.get('y'))
                     y_values.append(y)
+
+                    # Add the name of the station to the point in the plot
                     plt.annotate(current_station, (x, y))
+
                     break
 
         plt.plot(x_values, y_values, marker='o', color=colors[c], label=f'train {c+1}')
         plt.axis("off")
 
+        # Update counter
         c = c + 1
 
     file.close()
 
+    # Plot the figure
     plt.legend()
     plt.show()
 
+# Render example output 
 map_solution('example_output.csv')
