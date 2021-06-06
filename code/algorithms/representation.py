@@ -41,5 +41,14 @@ def convert_solution(solution):
         # Write the headers
         writer.writerow(['train', 'stations'])
 
-        for trajectory in solution.trajectories:
-            writer.writerow(['trein', solution.stations])
+        # Write the content
+        for i in range(len(solution.trajectories)):
+            printable = []
+
+            for station in solution.trajectories[i].stations:
+                printable.append(station.name)
+
+            writer.writerow([f'train_{i+1}', printable])
+
+        # Add additional bit for quality once we reach part two
+
