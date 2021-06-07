@@ -14,14 +14,10 @@ class Trajectories:
     def add_trajectory(self, trajectory):
         self.trajectories.append(trajectory)    
 
-    # def timing(self):
-    #     if time > 120:
-    #         return False
-
     # def check_station(self):
     #     """
     #     Check whether all stations are included in a trajectory.
     #     """
     #     pass
 
-
+    # functie voor kwaliteit
