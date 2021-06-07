@@ -1,5 +1,3 @@
-# from data import csv
-
 class Trajectory:
     """
     Class Trajectory is an object that describes connections between the 22 most important train stations.
@@ -9,9 +7,10 @@ class Trajectory:
         self.duration = 0
         self.stations = []
 
-    def timing(self):
-        if time > 120:
-            return False
+    # def timing(self):
+    #     if time > 120:
+    #         return False
 
     def add_station(self, station):
         self.stations.append(station)
+        

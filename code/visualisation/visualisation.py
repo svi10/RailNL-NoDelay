@@ -71,6 +71,3 @@ def map_solution(solution):
     # Plot the figure
     plt.legend()
     plt.show()
-
-# Render example output 
-map_solution('example_output.csv')
