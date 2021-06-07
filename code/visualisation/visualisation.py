@@ -1,23 +1,16 @@
 import matplotlib.pyplot as plt
 import csv
 
-def map_solution(solution):
+from code.classes.station import Station
+
+
+def map_solution(solution, trajectories):
     """
     map out all trajectories from a specific solution
     """
 
     # Different colors to plot each trajectory in
     colors = ['green', 'red', 'blue', 'lime', 'orange', 'cyan', 'yellow']
-
-    # Create list of coordinates for all stations
-    coordinates = []
-
-    file = open('StationsHolland.csv')  # ! Adjust this so the file can be varied based on the user input
-    reader = csv.DictReader(file)
-    
-    for row in reader:
-        coordinates.append(row)
-    file.close()
 
     # Plot the trajectories
     plt.figure(figsize=(10,10))
@@ -30,7 +23,8 @@ def map_solution(solution):
 
     for row in reader:
         # End when the end of the file is reached
-        if row.get('train') == 'score':
+        if row.get('train') == 'score':                 
+            score = row.get('stations')
             break 
 
         # Retrieve all stations in the trajectory
@@ -38,27 +32,21 @@ def map_solution(solution):
         
         # Clean up the list of stations
         stations = stations.strip('[]').split(', ')
-        
 
         # Get coordinates for each train in the trajectory
         x_values = []
         y_values = []
 
-        for i in range(len(stations)):
-            current_station = stations[i]
-            for j in range(len(coordinates)):
-                coordinate = coordinates[j]
-                if coordinate.get('station') == current_station:
-                    x = float(coordinate.get('x'))
-                    x_values.append(x)
+        for station_name in stations:
+            # Acquire the station object
+            station = trajectories.stations[station_name]
 
-                    y = float(coordinate.get('y'))
-                    y_values.append(y)
-
-                    # Add the name of the station to the point in the plot
-                    plt.annotate(current_station, (x, y))
-
-                    break
+            # Save the coordinates
+            x_values.append(float(station.x))
+            y_values.append(float(station.y))
+            
+            # Add the name of the station to the point in the plot
+            plt.annotate(station.name, (station.x, station.y))                 
 
         plt.plot(x_values, y_values, marker='o', color=colors[c], label=f'train {c+1}')
         plt.axis("off")
@@ -70,4 +58,6 @@ def map_solution(solution):
 
     # Plot the figure
     plt.legend()
+    plt.title(f'score = {score}')
+    plt.savefig('solutions/solution.png')
     plt.show()

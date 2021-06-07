@@ -8,7 +8,7 @@ def load_stations(stationfile):
     with open(stationfile) as f:
         reader = csv.DictReader(f)
         for row in reader:
-            stations[row['station']] = Station(row['station'], row['x'], row['y'])
+            stations[row['station']] = Station(row['station'], float(row['x']), float(row['y']))
             
     return stations    
 
