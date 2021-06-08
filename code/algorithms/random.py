@@ -13,10 +13,9 @@ def random_solution_1(trajectories):
         # If the previous solution did not contain all connections, start with an empty list of trajectories
         trajectories.empty()
     
-        while trajectories.count_trajectories < 8:
+        while len(trajectories.trajectories) < 8:
             # Get reandom starting station
             # station will be the starting station object
-            # connections will be a list of the connections where each connection looks like [station, distance]
             station = random.choice(list(trajectories.connections.keys()))
 
             # Create the Trajectory

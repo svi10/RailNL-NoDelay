@@ -28,7 +28,13 @@ class Trajectories:
         Returns True if all connections are being used, else False.
         """
         # Make an overview of all connections that are being used in the solution thusfar
-        
+        used_connections = {}
+        for trajectory in self.trajectories:
+            for i in range(len(trajectory) - 1):
+                if trajectory[i] in used_connections.keys():
+                    used_connections[trajectory[i]].append(trajectory[i + 1])
+                else:
+                    used_connections[trajectory[i]] = trajectory[i + 1]
 
         # Compare the used connections to all available connections
         if self.connections == used_connections:
@@ -38,7 +44,7 @@ class Trajectories:
 
 
     def count_trajectories(self):
-        return len(trajectories)
+        return int(len(trajectories))
 
-    def empty():
+    def empty(self):
         self.trajectories.clear()
