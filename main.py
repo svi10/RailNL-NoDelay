@@ -1,7 +1,13 @@
 import csv
 from sys import argv
+
 from code.classes.trajectories import Trajectories
-from code.algorithms.representation import give_solution, convert_solution
+from code.visualisation.convert import convert_solution
+from code.visualisation.visualisation import map_solution
+
+import code.algorithms.random as random
+
+from code.algorithms.representation import give_solution
 
 if __name__ == "__main__":
     if len(argv) == 2:
@@ -15,9 +21,8 @@ if __name__ == "__main__":
 
     trajectories = Trajectories(stationfile, connectionfile)
 
-    connections = trajectories.stations
-    
+    trajectories = random.random_solution_1(trajectories)
 
-    solution = give_solution(connections, trajectories)       # Adjust this
-    solution_csv = convert_solution(solution)
-        
+    # Acquire solutions
+    #   solution = give_solution(trajectories.stations, trajectories) 
+    #   solution_csv = convert_solution(solution)

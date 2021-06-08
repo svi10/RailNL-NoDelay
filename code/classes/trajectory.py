@@ -10,7 +10,15 @@ class Trajectory:
     # def timing(self):
     #     if time > 120:
     #         return False
+    #     else:
+    #         return True
 
     def add_station(self, station):
         self.stations.append(station)
+
+    def get_stations(self):
+        return self.stations
+
+    def get_duration(self):
+        return self.duration()
         
