@@ -36,6 +36,10 @@ def quality_solution_2(trajectories, quality):
             Min = trajectory.timing
             quality = p *10000 - (T * 100 + Min)
 
+            # # Save the trajectory if its quality is higher than the highest quality trajectory so far
+            # if trajectory.quality > quality:
+            #     trajectories.save()
+
             # Save the trajectory only if the quality is maximized
             if quality.scipy.optimize.maximize():
                 return quality
