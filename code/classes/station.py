@@ -16,6 +16,9 @@ class Station:
         # sets attribute visited equal to false when the station is first initialized
         self.visited = False
 
+    def __repr__(self):
+        return self.name
+
     def add_connection(self, destination, tripduration):
         """
         Accepts another Station (object) and tripduration, and stores those in the dictionary

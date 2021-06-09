@@ -8,6 +8,7 @@ from code.visualisation.visualisation import map_solution
 import code.algorithms.random as random
 
 from code.algorithms.representation import give_solution
+from code.algorithms.randomquality import quality_solution_2
 
 if __name__ == "__main__":
     if len(argv) == 2:
@@ -20,9 +21,17 @@ if __name__ == "__main__":
     connectionfile = f"data/Connecties{region}.csv"
 
     trajectories = Trajectories(stationfile, connectionfile)
+    
+    quality_solution_2(trajectories)
 
-    trajectories = random.random_solution_1(trajectories)
+    print(trajectories.quality)
 
+   
+"""
     # Acquire solutions
-    #   solution = give_solution(trajectories.stations, trajectories) 
-    #   solution_csv = convert_solution(solution)
+    give_solution(trajectories.stations, trajectories) 
+    convert_solution(trajectories)
+
+    solution_csv = trajectories.get_file_name('.csv')
+    map_solution(f'solutions/csv_files/{solution_csv}', trajectories)
+"""

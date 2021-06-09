@@ -26,7 +26,7 @@ def random_solution_1(trajectories):
 
             # Add additional stations to the trajectory
             # Stop when the time limit is exceeded
-            while trajectory.timing:
+            while trajectory.timing():
                 while station not in trajectory.get_stations():
                     station = random.choice(list(station.connections.keys()))       # Change to a station.random_connection() method
                 trajectory.add_station(station)

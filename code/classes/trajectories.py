@@ -8,7 +8,7 @@ class Trajectories:
         self.duration = 0
         self.trajectories = []
         self.stations = load_stations(stationfile)
-        self.connections = load_connections(connectionfile, self.stations)
+        self.connections, self.total_connections = load_connections(connectionfile, self.stations)
         self.quality = 0
 
     #zet algoritme hier
@@ -54,3 +54,24 @@ class Trajectories:
     def get_file_name(self, type):
         filename = 'solution_' + str(self.quality) + type
         return filename
+
+    def calculate_quality(self):
+        """
+        Calculate the quality of the solution.
+        """
+        # Count the number of used connections
+        # First create a list with all connections that occur in the trajectory
+        used_connections = []
+
+        for trajectory in self.trajectories:
+            for i in range(1, len(trajectory)):
+                connection = [trajectory[i], trajectory[i - 1]]
+
+                if connection and connection.reverse() not in used_connections:
+                    used_connections.append(connection)
+
+        p  = len(used_connections) / self.total_connections
+        T  = self.count_trajectories()
+        Min = self.duration
+        
+        self.quality = p * 10000 - (T * 100 + Min)

@@ -18,6 +18,7 @@ def load_connections(connectionfile, stations):
     
     with open(connectionfile) as connection_file:
         reader = csv.DictReader(connection_file)
+        
         for row in reader:
             # Add connections to the station object
             stations[row['station1']].add_connection(stations[row['station2']], int(row['distance']))
@@ -27,7 +28,10 @@ def load_connections(connectionfile, stations):
             update_overview(connections, row['station1'], row['station2'])
             update_overview(connections, row['station2'], row['station1'])
 
-    return connections
+        # Count number of rows, a.k.a. number of connections
+        total_connections = len(list(reader))
+
+    return connections, total_connections
 
 def update_overview(overview, station_1, station_2):
     if station_1 in overview:
