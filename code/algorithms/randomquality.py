@@ -8,6 +8,8 @@ def quality_solution_2(trajectories, quality):
     Gives a high quality solution for Assignment 1.2
     """
 
+# maximaliseren misschien niet nodig (zijn op zoek naar zo hoog mogelijk). Runt de scipy.optimize.maximize() als er geen optimum mogelijk is?
+
     while not quality.scipy.optimize.maximize():
         # If the previous solution did not contain maximize quality 'K', start with an empty list of trajectories
         trajectories.empty()

@@ -22,6 +22,7 @@ class Trajectories:
     #     pass
 
     # functie voor kwaliteit
+    # Hoe te vergelijken dat er een traject is met een zo hoog mogelijke kwaliteit tot nu toe
 
     def check_connections(self):
         """
