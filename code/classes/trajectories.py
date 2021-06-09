@@ -9,6 +9,7 @@ class Trajectories:
         self.trajectories = []
         self.stations = load_stations(stationfile)
         self.connections = load_connections(connectionfile, self.stations)
+        self.quality = 0
 
     #zet algoritme hier
     def add_trajectory(self, trajectory):
@@ -48,3 +49,7 @@ class Trajectories:
 
     def empty(self):
         self.trajectories.clear()
+
+    def get_file_name(self, type):
+        filename = 'solution_' + str(self.quality) + type
+        return filename

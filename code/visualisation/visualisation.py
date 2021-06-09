@@ -6,7 +6,8 @@ from code.classes.station import Station
 
 def map_solution(solution, trajectories):
     """
-    map out all trajectories from a specific solution
+    Map out all trajectories from a specific solution
+    Takes as input the solution as both a csv file and as a Trajectories object.
     """
 
     # Different colors to plot each trajectory in
@@ -23,7 +24,8 @@ def map_solution(solution, trajectories):
 
     for row in reader:
         # End when the end of the file is reached
-        if row.get('train') == 'score':                 
+        if row.get('train') == 'score':
+            # Save the quality score to later display in the title of the figure                 
             score = row.get('stations')
             break 
 
@@ -59,5 +61,6 @@ def map_solution(solution, trajectories):
     # Plot the figure
     plt.legend()
     plt.title(f'score = {score}')
-    plt.savefig('solutions/solution.png')
-    plt.show()
+
+    filename = trajectories.get_file_name('.png')
+    plt.savefig(f'solutions/images/{filename}')
