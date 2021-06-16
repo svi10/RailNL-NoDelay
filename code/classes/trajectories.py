@@ -46,7 +46,7 @@ class Trajectories:
 
 
     def count_trajectories(self):
-        return int(len(trajectories))
+        return int(len(self.trajectories))
 
     def empty(self):
         self.trajectories.clear()
@@ -75,3 +75,28 @@ class Trajectories:
         Min = self.duration
         
         self.quality = p * 10000 - (T * 100 + Min)
+
+    def get_smallest_stations(self, used_stations):
+        """
+        Returns a list of all stations with the lowest number of connections.
+        i.e. in the beginning it will return all stations with one connection, once those are gone all stations with two connections.
+        """
+        smallest_stations = []
+
+        # Iterate through all possible stations
+        for station in list(self.stations.values()):
+            # Check if this station is already being used
+            if station in used_stations:
+                continue
+            # Add the station to the list if the list is empty
+            elif not smallest_stations:
+                smallest_stations.append(station)
+            # Replace the list if the current station has less connections than the stations currently in the list
+            elif len(station.connections) < len(smallest_stations[0].connections):
+                smallest_stations.clear()
+                smallest_stations.append(station)
+            # If the current station has as many connections as the stations already in the list, add it
+            elif len(station.connections) == len(smallest_stations[0].connections):
+                smallest_stations.append(station)
+
+        return smallest_stations
